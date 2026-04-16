@@ -20,6 +20,18 @@ docker/
 - **友好交互 Shell**：内置 Fish + Starship，进入容器后即可获得美观、可补全的终端体验。
 - **Git HTTPS 改写**：自动将 `ssh://git@github.com/`、`git@github.com:` 改写为 `https://github.com/`，避免在容器中配置 SSH Key。
 
+## 适用环境
+
+本工程以 **Linux（Ubuntu 20.04+）** 为生产环境，同时兼容以下开发环境：
+
+| 环境 | 支持情况 | 说明 |
+| --- | --- | --- |
+| Ubuntu / Linux | ✅ 生产环境 | 原生 Docker Engine，开箱即用 |
+| macOS | ✅ 开发可用 | 需安装 Docker Desktop |
+| Windows | ⚠️ 仅限 WSL2 | 须在 WSL2 环境中执行 `docker compose`，Docker Desktop 启用 WSL2 后端 |
+
+> 容器内部基于 `node:22-slim`（Debian），与宿主系统无关；兼容性差异主要来自 `/var/run/docker.sock` 挂载与 `~` 路径展开。
+
 ## 前置要求
 
 - 宿主机已安装 [Docker Engine](https://docs.docker.com/engine/install/) 与 [Docker Compose v2](https://docs.docker.com/compose/)。
