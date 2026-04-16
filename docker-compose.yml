@@ -1,0 +1,25 @@
+services:
+  openclaw:
+    build:                                                        # 根据Dockerfile创建docker镜像
+      context: .                                                  # 当前目录
+      dockerfile: Dockerfile                                      # Dockerfile文件名
+    image: openclaw-fish
+    container_name: openclaw                                      # 容器名字
+    restart: unless-stopped                                       # 自动重启
+    ports:
+      - "18789:18789"                                             # 端口映射
+    volumes:
+      - ~/work/openclaw/workspace:/workspace                      # 工作目录持久化
+      - ~/work/openclaw/config:/root/.openclaw                    # 配置目录持久化
+      - /var/run/docker.sock:/var/run/docker.sock                 # 容器内调用Docker
+    environment:
+      - OPENCLAW_SANDBOX=docker                                   # 开启Docker沙箱
+      - OPENCLAW_SANDBOX_ALLOW_NETWORK=true                       # 允许沙箱联网
+    stdin_open: true                                              # 保持容器输入开启，不让它自动退出
+    tty: true                                                     # 分配虚拟终端，让命令能正常运行
+    command: fish -c "openclaw gateway & tail -f /dev/null"       # 保证主进程一直在，避免docker反复重启
+
+
+# 创建容器：docker compose up -d --build   # 第一次运行需加上--build
+# 进入容器：docker exec -it openclaw fish
+# 查看容器情况：docker compose ps，STATUS为up为正常
