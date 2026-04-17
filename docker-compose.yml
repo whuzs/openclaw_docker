@@ -17,11 +17,10 @@ services:
       - OPENCLAW_SANDBOX_ALLOW_NETWORK=true                       # 允许沙箱联网
     stdin_open: true                                              # 保持容器输入开启，不让它自动退出
     tty: true                                                     # 分配虚拟终端，让命令能正常运行
-    command: fish -c "openclaw gateway & tail -f /dev/null"       # 保证主进程一直在，避免docker反复重启
+    command: fish -c "openclaw gateway run & tail -f /dev/null"   # 保证主进程一直在，避免docker反复重启
 
 
 # 创建容器：docker compose up -d --build   # 第一次运行需加上--build
 # 进入容器：docker exec -it openclaw fish
 # 查看容器情况：docker compose ps，STATUS为up为正常
-# 创建后进入docker，初始化openclaw: Missing config. Run `openclaw setup` or set gateway.mode=local (or pass --allow-unconfigured).
-
+# 网页访问： http://127.0.0.1:18789/
