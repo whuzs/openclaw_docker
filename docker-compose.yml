@@ -23,3 +23,5 @@ services:
 # 创建容器：docker compose up -d --build   # 第一次运行需加上--build
 # 进入容器：docker exec -it openclaw fish
 # 查看容器情况：docker compose ps，STATUS为up为正常
+# 创建后进入docker，初始化openclaw: Missing config. Run `openclaw setup` or set gateway.mode=local (or pass --allow-unconfigured).
+
